@@ -69,8 +69,6 @@ header.top .kicker{font-family:var(--f-display);font-stretch:110%;font-size:12px
 .stat .det{font-size:12px;color:var(--ink-2)}
 .stat.good{border-left-color:var(--good)} .stat.bad{border-left-color:var(--bad)} .stat.warn{border-left-color:var(--warn)}
 .stat.s-pour{border-left-color:var(--v-pour)} .stat.s-contre{border-left-color:var(--v-contre)} .stat.s-cens{border-left-color:var(--v-cens)}
-.pbar{display:block;height:5px;border-radius:3px;background:var(--surface-2);margin-top:6px;overflow:hidden}
-.pbar i{display:block;height:100%;background:var(--v-cens);border-radius:3px}
 .stat .val .ic{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;vertical-align:2px}
 
 /* main grid */
@@ -133,16 +131,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:12px 0}
 .mb .tr i{position:absolute;top:0;bottom:0;border-radius:4px}
 
 /* matrix */
-.presets{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:8px;margin-bottom:12px}
-.scn{display:flex;flex-direction:column;gap:2px;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 10px;cursor:pointer;min-height:112px}
-.scn:hover{border-color:var(--accent)}
-.scn.on{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset;background:var(--accent-soft)}
-.scn-f{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.scn-n{font-family:var(--f-display);font-weight:700;font-size:15px;line-height:1.15}
-.scn-s{font-size:11.5px;color:var(--ink-2);line-height:1.3}
-.scn-p{margin-top:auto;padding-top:6px}
-.scn-k{display:flex;justify-content:space-between;gap:6px;white-space:nowrap;font-size:11.5px;margin-top:3px;font-variant-numeric:tabular-nums}
-.scn-x{display:flex;flex-direction:column;gap:6px;justify-content:center;align-items:flex-start}
+.presets{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .scenbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:-4px 0 -6px}
 .custom{font-size:12.5px;color:var(--muted);font-style:italic;padding:0 4px}
 .btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 11px;cursor:pointer;font-size:13px}
@@ -305,7 +294,6 @@ footer p{max-width:110ch;margin:6px 0}
   .am td{display:block;border:0!important;padding:2px 0!important;max-width:none!important}
   .am td:nth-child(3){display:none}
   .scroll[style*="max-height"]{max-height:none!important}
-  .presets{grid-template-columns:repeat(2,1fr)} .scn{min-height:104px}
   .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;gap:10px;align-items:center;justify-content:space-between;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -4px 14px rgba(0,0,0,.08);font-size:13px}
   .mbar b{font-family:var(--f-display);font-size:15px}
   .mbar .ic{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
@@ -402,7 +390,7 @@ footer p{max-width:110ch;margin:6px 0}
       <div class="seg" role="group" aria-label="Hypothèse de chiffrage"><button data-chif="A" aria-pressed="true" title="Montants annoncés par les auteurs des mesures et par le PLF">Affiché</button><button data-chif="R" aria-pressed="false" title="Montants recoupés : Cour des comptes, revues de dépenses, contre-estimations">Recoupé</button></div>
     </div>
   </div>
-  <div class="presets" id="presets" role="group" aria-label="Scénarios d'accord"></div>
+  <div class="row" style="margin-bottom:8px"><div class="presets" id="presets" role="group" aria-label="Scénario"></div></div>
   <div class="scroll-hint mx-hint">Faites défiler le tableau horizontalement pour voir tous les groupes →</div>
   <div class="scroll"><table class="mx" id="matrix"></table></div>
   <div id="mcards"></div>
@@ -458,7 +446,7 @@ footer p{max-width:110ch;margin:6px 0}
 </section>
 
 <footer>
-  <p><b>Méthode.</b> Le modèle est volontairement simple et réglable. Chaque groupe part d'un point de départ face au PLF initial (réglable, justifié dans « Équilibres par groupe »), puis gagne ou perd des points selon les leviers modifiés par rapport au texte du Gouvernement. Le vote sur le texte se joue à la majorité des suffrages exprimés ; la censure exige la majorité absolue des membres en exercice, soit 288 voix pour 574 sièges pourvus (seuls les votes pour la motion comptent ; lors de la censure de décembre 2024, 288 voix étaient requises pour 575 députés). Chaque groupe est supposé voter en bloc, ce qui surestime la discipline des groupes LIOT et non-inscrits. La probabilité de censure suppose que chaque groupe censure avec une probabilité croissante quand son score approche le seuil (courbe logistique, ±0,6 point), les groupes votant indépendamment. Le solde public est calculé comme −5,0 % + écart / PIB, avec un PIB 2027 de 3 132 Md€ déduit de l'article liminaire du PLF ; les mesures sur les collectivités sont imputées au budget de l'État, sans effet de comportement des collectivités.</p>
+  <p><b>Méthode.</b> Le modèle est volontairement simple et réglable. Chaque groupe part d'un point de départ face au PLF initial (réglable, justifié dans « Équilibres par groupe »), puis gagne ou perd des points selon les leviers modifiés par rapport au texte du Gouvernement. Le vote sur le texte se joue à la majorité des suffrages exprimés ; la censure exige la majorité absolue des membres en exercice, soit 288 voix pour 574 sièges pourvus (seuls les votes pour la motion comptent ; lors de la censure de décembre 2024, 288 voix étaient requises pour 575 députés). Chaque groupe est supposé voter en bloc, ce qui surestime la discipline des groupes LIOT et non-inscrits. Le solde public est calculé comme −5,0 % + écart / PIB, avec un PIB 2027 de 3 132 Md€ déduit de l'article liminaire du PLF ; les mesures sur les collectivités sont imputées au budget de l'État, sans effet de comportement des collectivités.</p>
   <p><b>Sources.</b> Projet de loi de finances pour 2027 (exposé général, article liminaire) ; fichiers « marges_negociation_PLF_PLFSS_2027 » (Polyfact, sorts au 22-23 oct. 2026), « groupes_leviers_rendements » et « Suivi des contributions externes PLF27 » (chiffrages recoupés : Cour des comptes, revues de dépenses, contre-budget MEDEF) ; estimation Zucman recoupée : P. Aghion et X. Jaravel, contestée par G. Zucman ; Sénat (rapport PLFSS 2027) ; Bercy et Institut Montaigne (TVA énergie) ; Public Sénat (CumCum, superprofits) ; effectifs : assemblee-nationale.fr ; scrutins publics de la 17e législature (datan.fr et assemblee-nationale.fr, n° 8707 à 9759) ; déclarations relevées via Polyfact (Grand Jury du 25/10, LCP des 1/10 et 9/11, franceinfo du 1/11, TF1 du 27/10) ; Haut Conseil des finances publiques, avis du 7/10 (Public Sénat) ; annonces de la rapporteure générale du Sénat, 12/11 (Public Sénat) ; Solidaires (intersyndicale fonction publique, 9 et 13/11), Acteurs publics (13/11), Localtis, Maire-info, LCP, Économie Matin, Moneyvox (oct.-nov. 2026).</p>
 </footer>
 </div>
@@ -628,12 +616,9 @@ const dLvl=(l)=> l.opts[l.sel].lvl-l.opts[l.def].lvl;
 const changed=(l)=> l.sel!==l.def;
 
 const PRESETS = [
-  {id:'plf', fam:'', label:'PLF initial', sub:"Texte du Gouvernement", desc:"Texte déposé par le Gouvernement", set:{}},
-  {id:'ret', fam:'Transpartisan', label:'Geste retraités', sub:"Pensions indexées, abattement maintenu", desc:"Indexation de toutes les pensions et abandon du plafonnement de l'abattement de 10 % : les deux mesures que la gauche, le RN et l'UDR combattent tous. Coût ≈ 5,5 Md€, l'arbitrage que le Gouvernement a lui-même renvoyé au Parlement (Farandou, 20/10).", set:{pens:0, abat:0}},
-  {id:'psmin', fam:'Gauche', label:'PS a minima', sub:"Holdings et CumCum taxés", desc:"Deux mesures anti-optimisation sur lesquelles le Gouvernement s'est dit ouvert (Amiel, 14-15/10) : surtaxe des holdings patrimoniales et verrou anti-CumCum. Rapporte de l'argent.", set:{hold:1, cumcum:1}},
-  {id:'ps', fam:'Gauche', label:'Accord PS', sub:"Retour sur les acquis 2026", desc:"Surtaxe d'IS maintenue au niveau 2026, pensions indexées, holdings et successions taxées, CDHR durcie", set:{is:0, pens:0, cdhr:1, succ:1, hold:1}},
-  {id:'rnmin', fam:'Droite', label:'RN a minima', sub:"Pensions indexées, TVA électricité", desc:"Les deux demandes mises en avant par S. Chenu (LCP, 9/11) : pas de « coup de rabot » sur les retraites et TVA à 5,5 % sur l'électricité.", set:{pens:0, tvaen:1}},
-  {id:'rn', fam:'Droite', label:'Accord RN', sub:"Retraités, collectivités, TVA, AME", desc:"Retraités et collectivités épargnés, IJ et allègements retirés, TVA à 5,5 % sur l'électricité, AME transformée en aide médicale d'urgence", set:{coll:0, abat:0, pens:0, ij:0, alleg:0, tvaen:1, ame:2}},
+  {id:'plf', label:'PLF initial', desc:"Texte déposé par le Gouvernement", set:{}},
+  {id:'ps', label:'Accord PS', desc:"Surtaxe d'IS maintenue au niveau 2026, pensions indexées, holdings et successions taxées, CDHR durcie", set:{is:0, pens:0, cdhr:1, succ:1, hold:1}},
+  {id:'rn', label:'Accord RN', desc:"Retraités et collectivités épargnés, IJ et allègements retirés, TVA à 5,5 % sur l'électricité, AME transformée en aide médicale d'urgence", set:{coll:0, abat:0, pens:0, ij:0, alleg:0, tvaen:1, ame:2}},
 ];
 
 /* ---------- état ---------- */
@@ -642,7 +627,6 @@ const BASE = {solde:-5.0, etat:-156.4, secu:-12.7, effort:43, tpo:44.2, s2026:-5
 
 function polarity(v){return v==='F'?1:v==='D'?-1:0}
 const r1=x=>Math.round(x*10)/10;
-const pct=p=>p<0.01?'< 1 %':p>0.99?'> 99 %':Math.round(p*100)+' %';
 const fs=x=>(x>0?'+':x<0?'−':'')+String(Math.abs(r1(x))).replace('.',',');
 function computeGroup(g){
   let delta=0; const parts=[];
@@ -671,13 +655,7 @@ function computeAll(){
   const alt=S.chif==='A'?'R':'A';
   LEV.forEach(l=>{ if(!changed(l)) return; const v=dVal(l); if(l.champ==='Secu'){const e=l.etat||0; dSecu+=v*(1-e); dEtat+=v*e;} else dEtat+=v; if(l.nat==='PO')dPO+=v; else dDep+=v; rows.push({l,v}); dAlt+=dVal(l,alt); });
   const dTot=dEtat+dSecu;
-  // probabilité : chaque groupe censure avec une probabilité logistique de son score (σ = 0,6 point),
-  // puis loi exacte du nombre de voix de censure (groupes indépendants, vote en bloc)
-  let dist=new Map([[0,1]]);
-  GROUPS.forEach(g=>{const p=1/(1+Math.exp((R[g.id].score-(S.tCens+0.5))/0.6)); R[g.id].p=p; const nd=new Map();
-    dist.forEach((pr,v)=>{nd.set(v,(nd.get(v)||0)+pr*(1-p)); nd.set(v+g.seats,(nd.get(v+g.seats)||0)+pr*p);}); dist=nd;});
-  let pc=0; dist.forEach((pr,v)=>{ if(v>=CENSURE_MAJ) pc+=pr; });
-  return {R,pour,contre,abst,cens,falls,dEtat,dSecu,dTot,dPO,dDep,rows,dAlt,pc};
+  return {R,pour,contre,abst,cens,falls,dEtat,dSecu,dTot,dPO,dDep,rows,dAlt};
 }
 
 /* ---------- format ---------- */
@@ -696,7 +674,7 @@ const ST_LBL={pour:'Soutient le texte',abst:"S'abstient",contre:'Vote contre, sa
 const ST_SHORT={pour:'Soutien',abst:'Abstention',contre:'Contre',cens:'Censure'};
 const ST_COL={pour:'var(--v-pour)',abst:'var(--v-abst)',contre:'var(--v-contre)',cens:'var(--v-cens)'};
 const stateOf=r=> r.cens?'cens': r.vote==='contre'?'contre': r.vote==='abst'?'abst':'pour';
-const pillSt=r=>{const s=stateOf(r); return `<span class="pill p-${s}" title="Probabilité de voter la censure : ${pct(r.p||0)}">${ST_SHORT[s]}</span>`;};
+const pillSt=r=>{const s=stateOf(r); return `<span class="pill p-${s}">${ST_SHORT[s]}</span>`;};
 
 /* ---------- hémicycle ---------- */
 const svg=document.getElementById('hemi');
@@ -780,11 +758,11 @@ function renderCore(){
   svg.querySelectorAll('.ring,.glab').forEach(e=>e.classList.toggle('dim', !!S.sel && e.dataset.g!==S.sel));
   const big=document.getElementById('c-big'), sub=document.getElementById('c-sub'), ver=document.getElementById('c-verdict');
   big.textContent=res.falls?'Renversé':'Maintenu'; big.setAttribute('fill',res.falls?'var(--v-cens)':'var(--v-pour)');
-  sub.textContent=`${res.cens} voix sur ${CENSURE_MAJ} · probabilité ${pct(res.pc)}`;
+  sub.textContent=`${res.cens} voix de censure pour ${CENSURE_MAJ} requises`;
   const ok=res.pour>res.contre; ver.textContent=`Vote du texte : ${ok?'adopté':'rejeté'} (${res.pour} – ${res.contre})`; ver.setAttribute('fill','var(--ink-2)'); ver.setAttribute('font-weight','600');
   document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed', b.dataset.mode===S.mode));
   svg.setAttribute('aria-label',`Hémicycle de l'Assemblée nationale : ${res.pour} sièges soutiennent le texte, ${res.abst} s'abstiennent, ${res.contre-res.cens} votent contre sans censurer, ${res.cens} votent la censure (${CENSURE_MAJ} requises). Gouvernement ${res.falls?'renversé':'maintenu'} en cas de 49.3.`);
-  renderLegend(res); renderStatus(res); renderPresets(); renderBudget(res); renderMatrix(res); renderGroups(res); renderFiche(res);
+  renderLegend(res); renderStatus(res); renderBudget(res); renderMatrix(res); renderGroups(res); renderFiche(res);
 }
 
 function renderLegend(res){
@@ -807,8 +785,8 @@ function setStat(id,val,det,cls){const e=document.getElementById(id); e.classNam
 function renderStatus(res){
   const ok=res.pour>res.contre;
   const ic=c=>`<span class="ic" style="background:${c}"></span>`;
-  setStat('st-cens', ic(res.falls?'var(--v-cens)':'var(--v-pour)')+(res.falls?'Renversé':'Maintenu'), `Probabilité de censure <b>${pct(res.pc)}</b> · ${res.cens} voix sur ${CENSURE_MAJ}<span class="pbar"><i style="width:${(res.pc*100).toFixed(1)}%"></i></span>`, res.falls?'s-cens':(CENSURE_MAJ-res.cens<30?'s-contre':'s-pour'));
-  document.getElementById('mbar').innerHTML=`<span><span class="ic" style="background:${res.falls?'var(--v-cens)':'var(--v-pour)'}"></span><b>${res.falls?'Renversé':'Maintenu'}</b> <span class="muted">${pct(res.pc)}</span></span><span>Texte <b>${ok?'adopté':'rejeté'}</b></span><span>Solde <b>${(()=>{const s=BASE.solde+res.dTot/S.pib*100; return (s<0?'−':'')+nfp.format(Math.abs(s))+' %';})()}</b></span>`;
+  setStat('st-cens', ic(res.falls?'var(--v-cens)':'var(--v-pour)')+(res.falls?'Renversé':'Maintenu'), `${res.cens} voix pour la censure, ${CENSURE_MAJ} nécessaires · ${res.falls?`${res.cens-CENSURE_MAJ} voix de trop`:`il en manque ${CENSURE_MAJ-res.cens}`}`, res.falls?'s-cens':(CENSURE_MAJ-res.cens<30?'s-contre':'s-pour'));
+  document.getElementById('mbar').innerHTML=`<span><span class="ic" style="background:${res.falls?'var(--v-cens)':'var(--v-pour)'}"></span><b>${res.falls?'Renversé':'Maintenu'}</b> <span class="muted">${res.cens}/${CENSURE_MAJ}</span></span><span>Texte <b>${ok?'adopté':'rejeté'}</b></span><span>Solde <b>${(()=>{const s=BASE.solde+res.dTot/S.pib*100; return (s<0?'−':'')+nfp.format(Math.abs(s))+' %';})()}</b></span>`;
   setStat('st-vote', ic(ok?'var(--v-pour)':'var(--v-contre)')+(ok?'Adopté':'Rejeté'), `${res.pour} pour · ${res.contre} contre · ${res.abst} abstentions`, ok?'s-pour':'s-contre');
   const solde=BASE.solde+res.dTot/S.pib*100;
   setStat('st-solde', (solde<0?'−':'')+nfp.format(Math.abs(Math.round(solde*100)/100))+' % du PIB', `${md(res.dTot)} vs PLF · cible −5,0 %`, solde>=-5.0001?'good':solde>-5.4?'warn':'bad');
@@ -949,22 +927,6 @@ function renderGroups(res){
   document.getElementById('gt-sum').textContent= piv.length?`Groupe(s) pivot(s) pour la censure : ${piv.join(', ')}`:'Aucun groupe proche du seuil ne peut, seul, changer l\'issue de la censure';
 }
 
-// Concessions acceptables par le Gouvernement (ses propres mesures, ou propositions qu'il ne rejette pas) qui sortent un groupe de la censure, au moindre coût
-function cheapest(gid){
-  const keep=LEV.map(l=>l.sel); const C=[];
-  LEV.forEach((l,i)=>l.opts.forEach((o,k)=>{ if(k===l.sel) return; if(l.type!=='gouv'&&l.pos.GOUV.v==='D') return; C.push([i,k]); }));
-  const base=computeAll(); let best=null;
-  const test=set=>{ set.forEach(([i,k])=>LEV[i].sel=k); const r=computeAll(); set.forEach(([i])=>LEV[i].sel=keep[i]);
-    if(r.R[gid].score>S.tCens){ const cost=r.dTot-base.dTot; const sc=-cost+0.3*set.length; if(!best||sc<best.sc) best={set,cost,sc}; } };
-  C.forEach(a=>test([a]));
-  if(!best) for(let x=0;x<C.length;x++) for(let y=x+1;y<C.length;y++){ if(C[x][0]!==C[y][0]) test([C[x],C[y]]); }
-  return best;
-}
-function priceBlock(id,r){
-  if(!r.cens) return '';
-  const b=cheapest(id);
-  return `<div class="small" style="margin:0 0 10px;padding:8px 10px;border-radius:8px;background:var(--v-cens-soft)"><b>Pour qu'il ne censure plus</b> : ${b?b.set.map(([i,k])=>`${esc(LEV[i].short.split(' (')[0])} → ${esc(LEV[i].opts[k].label)}`).join(' + ')+` <span class="num">(${Math.abs(b.cost)<0.05?'sans effet sur le solde':md(b.cost)})</span>`:"aucune concession acceptable par le Gouvernement ne suffit (une ou deux mesures testées)."}</div>`;
-}
 function renderFiche(res){
   const el=document.getElementById('fiche');
   const id=S.sel||'SOC'; const g=gById[id]; const r=res.R[id];
@@ -985,7 +947,6 @@ function renderFiche(res){
    <div class="small"><b>Soutient</b> : ${levF.length?esc(levF.join(' · ')):'<span class="muted">aucun levier suivi</span>'}</div>
    <div class="small" style="margin-top:4px"><b>Combat</b> : ${levD.length?esc(levD.join(' · ')):'<span class="muted">aucun levier suivi</span>'}</div>
    <hr class="sep">
-   ${priceBlock(id,r)}
    <h3>Portes ouvertes côté Gouvernement</h3>
    ${open.length?'<ul class="small" style="margin:6px 0 0;padding-left:18px">'+open.slice(0,5).map(a=>`<li><b>${esc(a.s)}</b> (n° ${esc(a.n)}) : ${esc(a.gv.slice(0,140))}${a.gv.length>140?'…':''}</li>`).join('')+'</ul>':'<div class="small muted">Aucun avis d\'ouverture relevé sur ses amendements.</div>'}
    <div class="xs muted" style="margin-top:8px">${S.sel?'':'Exemple affiché : Socialistes. '}Cliquez un groupe dans l'hémicycle ou le tableau.</div>`;
@@ -1073,19 +1034,13 @@ function renderAm(){
 }
 
 /* ---------- presets ---------- */
-function simPreset(p){ const keep=LEV.map(l=>l.sel); LEV.forEach(l=>{l.sel=(l.id in p.set)?p.set[l.id]:l.def;}); const r=computeAll(); LEV.forEach((l,i)=>l.sel=keep[i]); return r; }
 function renderPresets(){
-  const el=document.getElementById('presets');
-  el.innerHTML=PRESETS.map(p=>{ const r=simPreset(p); const col=r.pc>=0.5?'var(--v-cens)':r.pc>=0.2?'var(--v-contre)':'var(--v-pour)';
-    return `<button class="scn ${S.preset===p.id?'on':''}" data-preset="${p.id}" aria-pressed="${S.preset===p.id}" title="${esc(p.desc)}">
-      <span class="scn-f">${esc(p.fam||'Référence')}</span><span class="scn-n">${esc(p.label)}</span><span class="scn-s">${esc(p.sub)}</span>
-      <span class="scn-p"><span class="pbar"><i style="width:${(r.pc*100).toFixed(1)}%;background:${col}"></i></span><span class="scn-k"><span>Censure <b>${pct(r.pc)}</b></span><span class="${r.dTot>0.05?'up':r.dTot<-0.05?'down':'muted'}">${Math.abs(r.dTot)<0.05?'±0':md(r.dTot)}</span></span></span></button>`; }).join('')
-    + `<div class="scn-x">${S.preset?'':'<span class="custom">Scénario personnalisé</span>'}<button class="btn" data-reset="1" title="Revient au PLF initial et rétablit positions, points de départ, chiffrages et paramètres">Réinitialiser</button></div>`;
+  document.getElementById('presets').innerHTML=PRESETS.map(p=>`<button class="btn ${S.preset===p.id?'primary':''}" data-preset="${p.id}" aria-pressed="${S.preset===p.id}" title="${esc(p.desc)}">${esc(p.label)}</button>`).join('')+(S.preset?'':'<span class="custom">Scénario personnalisé</span>')+'<button class="btn" data-reset="1" title="Revient au PLF initial et rétablit positions, points de départ, chiffrages et paramètres">Réinitialiser</button>';
 }
 function applyPreset(id){
   const p=PRESETS.find(x=>x.id===id); S.preset=id;
   LEV.forEach(l=>{l.sel = (l.id in p.set)? p.set[l.id] : l.def;});
-  render();
+  renderPresets(); render();
 }
 
 /* ---------- interactions ---------- */
